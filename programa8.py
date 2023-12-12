@@ -29,21 +29,32 @@
 
 from string import ascii_letters
 abc = ascii_letters
-abecedario = list(abc)
-abecedario.extend(['ñ', 'Ñ'])
-abecedario.append(abecedario)
-print(abecedario)
+abecedario_incompleto = list(abc)
+abecedario_incompleto.extend(['ñ', 'Ñ'])
+abecedario_completo = list(abc)
+abecedario_incompleto.extend(abecedario_completo)
+abecedario = abecedario_incompleto 
+
 estilo = input("Escribe 'encriptar' para encriptar o 'desencriptar' para desencriptar: " )
 texto = input("Escribe el texto: ")
 shift = int(input("Escribe el número de shift: "))
-
-def encriptar(texto_entero, numero_shift):
-    texto_cifrado = ""
-    for letra in texto_entero:
-        posicion = abecedario.index(letra)
-        nueva_posicion = posicion + numero_shift
-        nueva_letra = abecedario[nueva_posicion]
-        texto_cifrado += nueva_letra
-    print(f"El texto cifrado es: {texto_cifrado}")
-
-encriptar(texto_entero=texto, numero_shift=shift)
+if estilo == "encriptar":
+    def encriptar(texto_entero, numero_shift):
+        texto_cifrado = ""
+        for letra in texto_entero:
+            posicion = abecedario.index(letra)
+            nueva_posicion = posicion + numero_shift
+            nueva_letra = abecedario[nueva_posicion]
+            texto_cifrado += nueva_letra
+        print(f"El texto cifrado es: {texto_cifrado}")
+    encriptar(texto_entero=texto,numero_shift=shift)
+else:
+    def desencriptar(texto_entero, numero_shift):
+        texto_cifrado = ""
+        for letra in texto_entero:
+            posicion = abecedario.index(letra)
+            nueva_posicion = posicion - numero_shift
+            nueva_letra = abecedario[nueva_posicion]
+            texto_cifrado += nueva_letra
+        print(f"El texto cifrado es: {texto_cifrado}")
+    desencriptar(texto_entero=texto,numero_shift=shift)
